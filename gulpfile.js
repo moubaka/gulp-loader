@@ -29,14 +29,14 @@ gulp.task('scripts', function () {
 gulp.task('styles', function () {
   gulp.src('./app/sass/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./public/css/','./app/css/'))
+    .pipe(gulp.dest('./public/css/'))
     .pipe(browserSync.stream());
 });
 ////////////////////////////////////////////////////////////
 //html task
 ////////////////////////////////////////////////////////////
 gulp.task('html', function () {
-  gulp.src('./templates/**/*.jade')
+  gulp.src('./app/templates/**/*.jade')
     .pipe(jade({ pretty: true }))
     .pipe(gulp.dest('./public/html/'));
 });
@@ -51,13 +51,13 @@ gulp.task('imagemin', function () {
 ////////////////////////////////////////////////////////////
 //browserSync task
 ////////////////////////////////////////////////////////////
-gulp.task('browser-sync', function () {
-  browserSync.init({
-     server: {
-      baseDir: "./templates/"
-    }
-  });
-});
+// gulp.task('browser-sync', function () {
+//   browserSync.init({
+//      server: {
+//       baseDir: "./public/html/"
+//     }
+//   });
+// });
 ////////////////////////////////////////////////////////////
 //Watch task
 ////////////////////////////////////////////////////////////
@@ -65,8 +65,9 @@ gulp.task('browser-sync', function () {
 //   gulp.watch('./app/js/**/*.js',['scripts']);
 //   gulp.watch('./app/sass/**/*.scss',['styles'])
 // });
-gulp.watch('./app/js/**/*.js', ['scripts']);
-gulp.watch('./app/sass/**/*.scss', ['styles'])
+gulp.watch('./app/js/**/*.js', ['scripts']).on('change', browserSync.reload);
+gulp.watch('./app/sass/**/*.scss', ['styles']).on('change', browserSync.reload);
+gulp.watch('./app/templates/**/*.jade', ['html']).on('change', browserSync.reload);
 
 ////////////////////////////////////////////////////////////
 //nodemon task
@@ -84,4 +85,4 @@ gulp.task('nodemon', function () {
 //Default task
 ////////////////////////////////////////////////////////////
 
-gulp.task('default', ['scripts', 'styles', 'nodemon', 'html','imagemin']);
+gulp.task('default', ['scripts', 'styles', 'nodemon', 'imagemin']);

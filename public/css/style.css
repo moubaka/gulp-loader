@@ -373,3 +373,6 @@ svg > path:hover {
 .p-inv {
   color: white;
   width: 50%; }
+
+.brand {
+  color: red; }

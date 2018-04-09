@@ -6,9 +6,8 @@ const app = express();
 app.set('view engine','jade');
 app.set('views', './app/templates')
 
-app.use('/image', express.static(path.join(__dirname, 'app/image')))
-app.use('/css', express.static(path.join(__dirname, 'app/css')))
-app.use('/js', express.static(path.join(__dirname, 'app/js')))
+app.use( express.static(path.join(__dirname, 'public')))
+
 /**
  * Routes
  */
