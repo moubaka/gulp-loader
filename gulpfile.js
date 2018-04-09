@@ -29,7 +29,7 @@ gulp.task('scripts', function () {
 gulp.task('styles', function () {
   gulp.src('./app/sass/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./public/css/'))
+    .pipe(gulp.dest('./public/css/','./app/css/'))
     .pipe(browserSync.stream());
 });
 ////////////////////////////////////////////////////////////
