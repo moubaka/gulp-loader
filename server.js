@@ -4,7 +4,7 @@ const port = 3000;
 const app = express();
 
 app.set('view engine','jade');
-app.set('views', './app/templates')
+app.set('views', './app/views')
 
 app.use( express.static(path.join(__dirname, 'public')))
 

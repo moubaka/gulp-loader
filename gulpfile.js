@@ -36,7 +36,7 @@ gulp.task('styles', function () {
 //html task
 ////////////////////////////////////////////////////////////
 gulp.task('html', function () {
-  gulp.src('./app/templates/**/*.jade')
+  gulp.src('./app/views/**/*.jade')
     .pipe(jade({ pretty: true }))
     .pipe(gulp.dest('./public/html/'));
 });
@@ -51,38 +51,40 @@ gulp.task('imagemin', function () {
 ////////////////////////////////////////////////////////////
 //browserSync task
 ////////////////////////////////////////////////////////////
-// gulp.task('browser-sync', function () {
-//   browserSync.init({
-//      server: {
-//       baseDir: "./public/html/"
-//     }
-//   });
-// });
+gulp.task('browser-sync', ['nodemon'] ,function () {
+  browserSync.init(null, {
+    proxy: "http://localhost:3000",
+    files: ["app/**/*.*"],
+    browser: "chrome",
+    port: 7000,
+  });
+});
+gulp.task('nodemon', function (cb) {
+
+  var started = false;
+
+  return nodemon({
+    script: 'server.js'
+  }).on('start', function () {
+    // to avoid nodemon being started multiple times
+    // thanks @matthisk
+    if (!started) {
+      cb();
+      started = true;
+    }
+  });
+
+});
 ////////////////////////////////////////////////////////////
 //Watch task
 ////////////////////////////////////////////////////////////
-// gulp.task('watch',function(){
-//   gulp.watch('./app/js/**/*.js',['scripts']);
-//   gulp.watch('./app/sass/**/*.scss',['styles'])
-// });
+
 gulp.watch('./app/js/**/*.js', ['scripts']).on('change', browserSync.reload);
 gulp.watch('./app/sass/**/*.scss', ['styles']).on('change', browserSync.reload);
-gulp.watch('./app/templates/**/*.jade', ['html']).on('change', browserSync.reload);
-
-////////////////////////////////////////////////////////////
-//nodemon task
-////////////////////////////////////////////////////////////
-
-gulp.task('nodemon', function () {
-  nodemon({
-    script: 'server.js',
-    ext: 'js html'
-
-  })
-});
+// gulp.watch('./app/views/**/*.jade', ['html']).on('change', browserSync.reload);
 
 ////////////////////////////////////////////////////////////
 //Default task
 ////////////////////////////////////////////////////////////
 
-gulp.task('default', ['scripts', 'styles', 'nodemon', 'imagemin']);
+gulp.task('default', ['scripts', 'styles', 'browser-sync', 'imagemin']);
