@@ -374,5 +374,10 @@ svg > path:hover {
   color: white;
   width: 50%; }
 
-.brand {
-  color: blue; }
+.alert {
+  text-align: center;
+  padding: 10px;
+  background: #79c879;
+  color: #fff;
+  margin-bottom: 10px;
+  display: none; }
