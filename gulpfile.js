@@ -11,6 +11,7 @@ const concat = require('gulp-concat');
 const nodemon = require('gulp-nodemon');
 const imagemin = require('gulp-imagemin');
 const browserSync = require('browser-sync').create();
+const minifyCSS = require('gulp-csso');
 
 ////////////////////////////////////////////////////////////
 //Scripts task
@@ -29,6 +30,9 @@ gulp.task('scripts', function () {
 gulp.task('styles', function () {
   gulp.src('./app/sass/*.scss')
     .pipe(sass().on('error', sass.logError))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(concat('style.min.css'))
+    .pipe(minifyCSS())
     .pipe(gulp.dest('./public/css/'))
     .pipe(browserSync.stream());
 });
