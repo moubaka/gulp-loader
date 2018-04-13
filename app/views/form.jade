@@ -3,40 +3,72 @@ extends base/layout
 block main
 
   .container
-    h1.brand
-      span Acme
-      |  Web Design
-    .wrapper
-      .company-info
-        h3 Acme Web Design
-        ul
-          li
-            i.fa.fa-road
-            |  44 Something st
-          li
-            i.fa.fa-phone
-            |  (555) 555-5555
-          li
-            i.fa.fa-envelope
-            |  test@acme.test
-      .contact-f
-        h3 Email Us
-        .alert Your message has been sent
-        form#contactForm
-          p
-            label Name
-            input#name(type='text', name='name', required='')
-          p
-            label Company
-            input#company(type='text', name='company')
-          p
-            label Email Address
-            input#email(type='email', name='email', required='')
-          p
-            label Phone Number
-            input#phone(type='text', name='phone')
-          p.full
-            label Message
-            textarea#message(name='message', rows='5')
-          p.full
-            button(type='submit') Submit
+    .jumbotron.centered
+      h1
+        span Acme
+        |  Web Design
+      .wrapper
+        .company-info
+          h3 Acme Web Design
+          ul
+            li
+              i.fa.fa-road
+              |  44 Something st
+            li
+              i.fa.fa-phone
+              |  (555) 555-5555
+            li
+              i.fa.fa-envelope
+              |  test@acme.test
+        .contact-f
+          h3 Email Us
+          .alert Your message has been sent
+    form#contactForm
+      .form-group.row
+        label.col-sm-2.col-form-label(for='name') Name
+        .col-sm-10
+          input#name.form-control(type='text', placeholder='name')
+      .form-group.row
+        label.col-sm-2.col-form-label(for='email') Email
+        .col-sm-10
+          input#email.form-control(type='email', placeholder='Email')
+      .form-group.row
+        label.col-sm-2.col-form-label(for='password') Password
+        .col-sm-10
+          input#password.form-control(type='password', placeholder='Password')
+      .form-group.row
+        label.col-sm-2.col-form-label(for='Phone') Phone
+        .col-sm-10
+          input#Phone.form-control(type='tel', placeholder='Phone')
+      .form-group.row
+        label.col-sm-2.col-form-label(for='message') Textarea
+        .col-sm-10
+          textarea#message.form-control(rows='5')
+      fieldset.form-group
+        .row
+          label.col-form-label.col-sm-2 Radios
+          .col-sm-10
+            .form-check
+              input#gridRadios1.form-check-input(type='radio', name='gridRadios', value='option1', checked='')
+              label.form-check-label(for='gridRadios1')
+                | First radio
+            .form-check
+              input#gridRadios2.form-check-input(type='radio', name='gridRadios', value='option2')
+              label.form-check-label(for='gridRadios2')
+                | Second radio
+      .form-group.row
+        .col-sm-2 Checkbox
+        .col-sm-10
+          .form-check.form-check-inline
+            input#inlineCheckbox1.form-check-input(type='checkbox', value='option1', name='gridCheck' )
+            label.form-check-label(for='inlineCheckbox1') 1
+          .form-check.form-check-inline
+            input#inlineCheckbox2.form-check-input(type='checkbox', value='option2',name='gridCheck' )
+            label.form-check-label(for='inlineCheckbox2') 2
+      .form-group
+        label(for='exampleFormControlFile1') Example file input
+        input#file.form-control-file(type='file')
+      .form-group.row
+        .col-sm-10
+          button.btn.btn-primary(type='submit') Sign in
+
